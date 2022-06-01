@@ -1,14 +1,29 @@
 import React, { useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { Alert, StyleSheet, View } from "react-native";
 
 import { Header } from "../components/Header";
 import { Task, TasksList } from "../components/TasksList";
 import { TodoInput } from "../components/TodoInput";
 
+export interface HandleEditTaskParams {
+  taskId: number;
+  taskNewTitle: string;
+}
+
 export function Home() {
   const [tasks, setTasks] = useState<Task[]>([]);
 
   function handleAddTask(newTaskTitle: string) {
+    const taskAlreadyExists = tasks.find((task) => task.title === newTaskTitle);
+
+    if (taskAlreadyExists) {
+      Alert.alert(
+        "Task já cadastrada",
+        "Você não pode cadastrar uma task com o mesmo nome"
+      );
+      return;
+    }
+
     const newTask = {
       id: new Date().getTime(),
       title: newTaskTitle,
@@ -30,8 +45,33 @@ export function Home() {
   }
 
   function handleRemoveTask(id: number) {
-    const filteredTasks = tasks.filter((task) => task.id !== id);
-    setTasks(filteredTasks);
+    Alert.alert(
+      "Remover item",
+      "Tem certeza que você deseja remover esse item?",
+      [
+        {
+          text: "Não",
+        },
+        {
+          text: "Sim",
+          onPress: () => {
+            const filteredTasks = tasks.filter((task) => task.id !== id);
+            setTasks(filteredTasks);
+          },
+        },
+      ]
+    );
+  }
+
+  function handleEditTask({ taskId, taskNewTitle }: HandleEditTaskParams) {
+    const editedTask = tasks.find((task) => task.id === taskId);
+    const updatedTasks = tasks.map((task) => ({ ...task }));
+    updatedTasks.forEach((task) => {
+      if (task.id === editedTask?.id) {
+        task.title = taskNewTitle;
+      }
+    });
+    setTasks(updatedTasks);
   }
 
   return (
@@ -44,6 +84,7 @@ export function Home() {
         tasks={tasks}
         toggleTaskDone={handleToggleTaskDone}
         removeTask={handleRemoveTask}
+        editTask={handleEditTask}
       />
     </View>
   );

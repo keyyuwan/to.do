@@ -90,7 +90,7 @@ export function TaskItem({
       <View style={styles.iconsContainer}>
         {isBeingEdited ? (
           <TouchableOpacity onPress={handleCancelEditing}>
-            <Icon name="x" size={24} color="#b2b2b2" />
+            <Icon name="x" size={24} color="#f0f2f5" />
           </TouchableOpacity>
         ) : (
           <TouchableOpacity onPress={handleStartEditing}>
@@ -131,13 +131,13 @@ const styles = StyleSheet.create({
     width: 16,
     borderRadius: 4,
     borderWidth: 1,
-    borderColor: "#B2B2B2",
+    borderColor: "#f0f2f5",
     marginRight: 15,
     alignItems: "center",
     justifyContent: "center",
   },
   taskText: {
-    color: "#666",
+    color: "#f0f2f5",
     fontFamily: "Inter-Medium",
   },
   taskMarkerDone: {
@@ -161,6 +161,6 @@ const styles = StyleSheet.create({
   iconDivider: {
     width: 1,
     height: 24,
-    color: "rgba(196, 196, 196, 0.24)",
+    color: "#3c3b3b",
   },
 });

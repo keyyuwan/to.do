@@ -11,8 +11,6 @@ This project was a challenge from the React Native Ignite bootcamp from Rocketse
 
 ## 💻 **Project**
 
----
-
 to.do is nothing but a task organizer app.
 
 ### ⚙️ **Features**
@@ -26,8 +24,6 @@ to.do is nothing but a task organizer app.
 - Alert to confirm task removal.
 
 ## ✨ **Technologies**
-
----
 
 #### ✅ React Native
 
